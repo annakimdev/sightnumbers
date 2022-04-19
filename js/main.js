@@ -2,47 +2,11 @@
 // Inspired by Sight Words app @BlawblawLaw
 // #100Devs 2022 side project by Anna Kim @annakim_dev
 
-// Define array of numbers
-const numberList = [
-    1,
-    10,
-    20,
-    30,
-    40,
-    50,
-    60,
-    70,
-    80,
-    90,
-    100,
-    110,
-    120,
-    130,
-    140,
-    150,
-    160,
-    170,
-    180,
-    190,
-    200,
-    300,
-    400,
-    500,
-    600,
-    700,
-    800,
-    900,
-    1000,
-    10000,
-    100000,
-    1000000,
-    10000000,
-    100000000,
-    1000000000,
-];
 
 // Define variable for speechSynthesis
 const synth = window.speechSynthesis;
+let voiceSelect = document.querySelector('select');
+let voices = [];
 
 // Define variable to store randomly selected number from the numberList array
 let readNumber = 0;
@@ -90,14 +54,15 @@ function saveNumber(arr) {
 
     // Make SpeechSynthesis to speak string type speakNumber
     let speech = new SpeechSynthesisUtterance(speakNumber);
+    
     // Get voices
-    let voices = synth.getVoices();
+    // let voices = synth.getVoices();
     // Select voice
-    speech.voice = voices[22]; // 1 to 21
+    // speech.voice = voices[22]; // 1 to 21
     // Setup volume, rate, pitch of speech
-    speechSynthesis.volume = 1; // 0 to 1
-    speechSynthesis.rate = 1; // 0.1 to 10
-    speechSynthesis.pitch = 1; //0 to 2
+    // speechSynthesis.volume = 1; // 0 to 1
+    speechSynthesis.rate = 0.6; // 0.1 to 10
+    speechSynthesis.pitch = 0.6; //0 to 2
     synth.speak(speech);
 
     // Increment counter for Next button
@@ -117,14 +82,16 @@ document.querySelector('#next').addEventListener("click",() => saveNumber(number
 function repeatNumber(num) {
     // Speak string type of readNumber
     let speech = new SpeechSynthesisUtterance(num.toString());
+
     // Get voices
-    let voices = synth.getVoices();
+    // let voices = synth.getVoices();
     // Select voice
-    speech.voice = voices[22]; // 1 to 21
+    // speech.voice = voices[22]; // 1 to 21
     // Setup volume, rate, pitch of speech
-    speechSynthesis.volume = 1; // 0 to 1
-    speechSynthesis.rate = 1; // 0.1 to 10
-    speechSynthesis.pitch = 1; //0 to 2
+    // speechSynthesis.volume = 1; // 0 to 1
+    // speechSynthesis.rate = 1; // 0.1 to 10
+    // speechSynthesis.pitch = 1; //0 to 2
+
     synth.speak(speech);
     console.log(`num: ${num}`);
     
@@ -143,14 +110,57 @@ function repeatNumber(num) {
 document.querySelector('#repeat').addEventListener("click",() => repeatNumber(readNumber));
 
 
+// Populate voice list
+function populateVoiceList() {
+    voices = synth.getVoices().sort(function (a, b) {
+        const aname = a.name.toUpperCase();
+        const bname = b.name.toUpperCase();
+        if (aname < bname) return -1;
+        else if (aname == bname) return 0;
+        else return +1;
+    });
+    let selectedIndex = voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
+    voiceSelect.innerHTML = '';
+    for (let i = 0; i < voices.length; i++) {
+        let option = document.createElement('option');
+        option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+
+        if (voices[i].default) {
+            option.textContent += ' -- DEFAULT';
+        }
+
+        option.setAttribute('data-lang', voices[i].lang);
+        option.setAttribute('data-name', voices[i].name);
+        voiceSelect.appendChild(option);
+    }
+    voiceSelect.selectedIndex = selectedIndex;
+}
+
+populateVoiceList();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+
+
 // SpeechSynthesisUtterance used to speak the currentNumber in different language
 function diffLanguageNumber(num) {
     let speech = new SpeechSynthesisUtterance(num.toString());
-    let voices = synth.getVoices();
-    speech.voice = voices[14]; // 14: Korean
-    speechSynthesis.volume = 1; // 0 to 1
-    speechSynthesis.rate = 1; // 0.1 to 10
-    speechSynthesis.pitch = 1; //0 to 2
+
+    // let voices = synth.getVoices();
+    // speech.voice = voices[14]; // 14: Korean
+    // speechSynthesis.volume = 1; // 0 to 1
+    speechSynthesis.rate = 0.8; // 0.1 to 10
+    // speechSynthesis.pitch = 1; //0 to 2
+
+    let selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+    for (let i = 0; i < voices.length; i++) {
+        if (voices[i].name === selectedOption) {
+            speech.voice = voices[i];
+            break;
+        }
+    }
+
+
     synth.speak(speech);
     console.log(num);
     
@@ -159,4 +169,6 @@ function diffLanguageNumber(num) {
 // The third button click runs diffLanguageNumber function
 document.querySelector('#diffLanguage').addEventListener("click",() => diffLanguageNumber(readNumber));
 
-
+// voiceSelect.onchange = function() {
+//     diffLanguageNumber(readNumber);
+// }
