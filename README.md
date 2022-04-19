@@ -1,3 +1,3 @@
-#Sight Numbers
-Inspired by Sight Words app @BlawblawLaw
-#100Devs 2022 side project by Anna Kim @annakim_dev
+# [Sight Numbers](https://sightnumbers.netlify.app/) #
+Inspired by [Sight Words app](https://blog.barbaralaw.me/creating-a-quick-web-app-and-iteratively-improving-it) @BlawblawLaw
+#100Devs by Anna Kim @annakim_dev
