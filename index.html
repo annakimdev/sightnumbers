@@ -12,25 +12,54 @@
 		<script src="https://kit.fontawesome.com/100efb9ac7.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/extra-styles.css">
 	</head>
 	<body>
-		<main>
-			<h1>Sight Numbers</h1>
-			<p id="numberDisplay">0</p>
-			<button id="next">Next</button>
-			<button id="repeat"><i class="fa-solid fa-repeat"></i></button>
-			<button id="diffLanguage"><i class="fa-solid fa-globe"></i></button>
-			<div class="select-dropdown">
-				<select id="voiceSelect"></select>
-			</div>
-		</main>
 		
-		<footer id="footer">Sight Numbers Inspired by Sight Words app @BlawblawLaw 
-			<br/>&copy; 2022 Anna Kim @annakim_dev
+		<nav class="absolute tp0 lp0 w100 db">
+			<div class="container">
+				<div class="row">
+					<div class="sm-down-off">
+						<div class="container-fluid">
+							<div class="sm-down-off"><div class="cf mt40"></div>
+							<p id="title" class="menu-active-off e-medium tcenter w100 pt9">Sight numbers</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<header class="js-small-trigger vc-block introduction h100">
+			<div class="vc-centered">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-centered tcenter">
+							<div>
+								<p id="numberDisplay">Hit next or spacebar</p>
+								<button id="next">Next</button>
+								<button id="repeat"><i class="fa-solid fa-ear-listen"></i></button>
+								<button id="diffLanguage"><i class="fa-solid fa-language"></i></button>
+								<div id="langList" class="select-dropdown col-centered tcenter">
+									<select id="voiceSelect"></select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<footer id="footer" class="footer db absolute bp0 lp0 w100 pb30"> 
+			<p class="small mt10 sm-down-off e-medium sp-1 gray pb-1">
+				Made with love by <a href="https://annakimdev.netlify.app/">@annakimdev</a>.
+			</p>
 		</footer>
 		
 
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/number-list.js"></script>
+
+		<audio id="audio" src="/assets/stop-13692.mp3"></audio>
 	</body>
 </html>

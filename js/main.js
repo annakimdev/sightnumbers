@@ -7,8 +7,10 @@
 const synth = window.speechSynthesis;
 let voiceSelect = document.querySelector('select');
 let voices = [];
+// let numDisplay = document.querySelector('#numberDisplay').textContent;
 
 // Define variable to store randomly selected number from the numberList array
+
 let readNumber = 0;
 
 // Define variables for counters to reset readNumber
@@ -63,7 +65,7 @@ function saveNumber(arr) {
     // speechSynthesis.volume = 1; // 0 to 1
     speechSynthesis.rate = 0.6; // 0.1 to 10
     speechSynthesis.pitch = 0.6; //0 to 2
-    synth.speak(speech);
+    // synth.speak(speech);
 
     // Increment counter for Next button
     nextCounter++;
@@ -78,31 +80,43 @@ function saveNumber(arr) {
 // Next button click runs saveNumber function
 document.querySelector('#next').addEventListener("click",() => saveNumber(numberList));
 
+// Hit spacebar to run saveNumber function
+document.body.onkeyup = function(e) {
+    if(e.keyCode == 32) {
+        saveNumber(numberList);
+    }
+}
+
 // SpeechSynthesisUtterance used to repeat the currentNumber
 function repeatNumber(num) {
-    // Speak string type of readNumber
-    let speech = new SpeechSynthesisUtterance(num.toString());
+    if(document.querySelector('#numberDisplay').innerHTML !== 'Hit next or spacebar') {
+        // Speak string type of readNumber
+        let speech = new SpeechSynthesisUtterance(num.toString());
 
-    // Get voices
-    // let voices = synth.getVoices();
-    // Select voice
-    // speech.voice = voices[22]; // 1 to 21
-    // Setup volume, rate, pitch of speech
-    // speechSynthesis.volume = 1; // 0 to 1
-    // speechSynthesis.rate = 1; // 0.1 to 10
-    // speechSynthesis.pitch = 1; //0 to 2
+        // Get voices
+        // let voices = synth.getVoices();
+        // Select voice
+        // speech.voice = voices[22]; // 1 to 21
+        // Setup volume, rate, pitch of speech
+        // speechSynthesis.volume = 1; // 0 to 1
+        // speechSynthesis.rate = 1; // 0.1 to 10
+        // speechSynthesis.pitch = 1; //0 to 2
 
-    synth.speak(speech);
-    console.log(`num: ${num}`);
+        synth.speak(speech);
+        console.log(`num: ${num}`);
+        
+        // Increment counter for Repeat button
+        repeatCounter++;
+        console.log(`repeatCounter: ${repeatCounter}`);
+
+        /* Commented out: Reset readNumber no longer needed */
+        // if (repeatCounter == 0) {
+        //     readNumber = 0;
+        // }    
+    } else {
+        return;
+    }
     
-    // Increment counter for Repeat button
-    repeatCounter++;
-    console.log(`repeatCounter: ${repeatCounter}`);
-
-    /* Commented out: Reset readNumber no longer needed */
-    // if (repeatCounter == 0) {
-    //     readNumber = 0;
-    // }
 
 }    
 
@@ -144,25 +158,30 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 
 // SpeechSynthesisUtterance used to speak the currentNumber in different language
 function diffLanguageNumber(num) {
-    let speech = new SpeechSynthesisUtterance(num.toString());
+    if(document.querySelector('#numberDisplay').innerHTML !== 'Hit next or spacebar'){
+        let speech = new SpeechSynthesisUtterance(num.toString());
 
-    // let voices = synth.getVoices();
-    // speech.voice = voices[14]; // 14: Korean
-    // speechSynthesis.volume = 1; // 0 to 1
-    speechSynthesis.rate = 0.8; // 0.1 to 10
-    // speechSynthesis.pitch = 1; //0 to 2
-
-    let selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-    for (let i = 0; i < voices.length; i++) {
-        if (voices[i].name === selectedOption) {
-            speech.voice = voices[i];
-            break;
+        // let voices = synth.getVoices();
+        // speech.voice = voices[14]; // 14: Korean
+        // speechSynthesis.volume = 1; // 0 to 1
+        speechSynthesis.rate = 0.8; // 0.1 to 10
+        // speechSynthesis.pitch = 1; //0 to 2
+    
+        let selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+        for (let i = 0; i < voices.length; i++) {
+            if (voices[i].name === selectedOption) {
+                speech.voice = voices[i];
+                break;
+            }
         }
+    
+    
+        synth.speak(speech);
+        console.log(num);
+    } else {
+        return;
     }
-
-
-    synth.speak(speech);
-    console.log(num);
+    
     
 }  
 
