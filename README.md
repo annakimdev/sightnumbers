@@ -1,10 +1,11 @@
 # Sight Numbers
 Educational website for multi-lingual Preschoolders to learn numbers by sight and sound. Numbers can be heard in English and a different language of choice.
-Inspired by [Sight Words app](https://blog.barbaralaw.me/creating-a-quick-web-app-and-iteratively-improving-it) @BlawblawLaw
+
+Inspired by [Sight Words app](https://blog.barbaralaw.me/creating-a-quick-web-app-and-iteratively-improving-it) @BlawblawLaw.
 
 **Link to project:** https://sightnumbers.netlify.app/
 
-![alt tag](https://i.ibb.co/1L5wbJf/sight-numbers-home.png)
+![alt tag](https://i.ibb.co/zQvFf32/sight-numbers-home-v2.png)
 
 ## How It's Made:
 
@@ -13,7 +14,6 @@ Inspired by [Sight Words app](https://blog.barbaralaw.me/creating-a-quick-web-ap
 Used Math.Random() method to choose and display a number from a list of common numbers for preschoolers. [Web Speech API](https://wicg.github.io/speech-api/) was utilized to generate sound of the numbers. Languages available in the user's browser are listed for selection.
 
 ## Optimizations
-*(optional)*
 
 Backend with authentication to be built to allow parents to login and create a custom list of numbers for their children. The buttons can be deactivated for few seconds after each click in order to allow speech output to finish reading the number. The language selection list can be improved to open downward instead of upward.
 
