@@ -94,6 +94,13 @@ button:active {
      justify-content: flex-end;
 }
 
+#repeat {
+     background-color: #69c8cf;
+}
+#diffLanguage {
+     background-color: #699fcf
+}
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
@@ -150,7 +157,7 @@ button:active {
 }
 
 #numberDisplay {
-     font-size: 4em;
+     font-size: 5em;
 }
 
 .sp-1 {
